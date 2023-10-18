@@ -1,4 +1,3 @@
-#include <cstdint>
 #include <iostream>
 
 struct Data
@@ -11,9 +10,18 @@ struct Data
 class Serializer
 {
 public:
+	Serializer();
+	~Serializer();
+	Serializer(const Serializer& o);
+	Serializer& operator=(const Serializer& o);
 	static uintptr_t serialize(Data* ptr);
 	static Data* deserialize(uintptr_t raw);
 };
+
+Serializer::Serializer() {};
+Serializer::~Serializer() {};
+Serializer::Serializer(const Serializer& o) {(void)o;};
+Serializer&	Serializer::operator=(const Serializer& o) {(void)o; return (*this);};
 
 uintptr_t	Serializer::serialize(Data* ptr)
 {
@@ -27,7 +35,7 @@ Data*	Serializer::deserialize(uintptr_t raw)
 
 int main()
 {
-	Data test(42, 69);
+	Data test(42, 1337);
 	(void)test;
 	// get the uintptr_t;
 	uintptr_t tst_ptr = Serializer::serialize(&test);

@@ -1,14 +1,17 @@
 NAME = convert
 
 CC = c++
-CFLAGS = -Wall -Werror -Wextra -std=c++98
+CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
 
 SRCS = main.cpp ConversionInput.cpp ScalarConverter.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
+%.o:%.cpp
+	$(CC) $(CFLAGS) -c $< -o $@
+
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) -o $(NAME)
+	$(CC) $(OBJS) -fsanitize=address -o $(NAME)
 
 all: $(NAME)
 

@@ -13,12 +13,14 @@ enum e_inputType
 	IT_SPC_D
 };
 
-// To build canonical stuff later
 class ConversionInput
 {
 public:
 	ConversionInput();
 	ConversionInput(const std::string &input);
+	~ConversionInput();
+	ConversionInput(const ConversionInput& conversionInput);
+	ConversionInput&		operator=(const ConversionInput& conversionInput);
 	static bool				inputIsChar(const std::string& input);
 	static bool				inputIsInt(const std::string& input);
 	static bool				inputIsFloat(const std::string& input);
@@ -29,7 +31,6 @@ public:
 	void					setInputType();
 	const std::string&		getInput()  const;
 	const enum e_inputType	&getInputType() const;
-	
 private:
 	const std::string		m_input;
 	enum e_inputType		m_inputType;

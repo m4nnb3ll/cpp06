@@ -9,9 +9,19 @@ ConversionInput::ConversionInput(const std::string &input)
 	setInputType();
 }
 
+ConversionInput::~ConversionInput() { };
+
+ConversionInput::ConversionInput(const ConversionInput& conversionInput)
+	:	m_input(conversionInput.m_input), m_inputType(conversionInput.m_inputType) { };
+
+ConversionInput&	ConversionInput::operator=(const ConversionInput& conversionInput)
+{ (void)conversionInput; return (*this); }
+
 void	ConversionInput::setInputType()
 {
-	if (inputIsChar(m_input))
+	if (m_input.empty())
+		m_inputType = IT_INVALID;
+	else if (inputIsChar(m_input))
 		m_inputType = IT_CHAR;
 	else if (inputIsInt(m_input))
 		m_inputType = IT_INT;
@@ -39,7 +49,8 @@ const std::string&	ConversionInput::getInput() const
 
 bool	ConversionInput::inputIsChar(const std::string& input)
 {
-	if (input.length() > 1|| !std::isalpha(input[0]))
+	if (input.length() > 1 || std::isdigit(static_cast<unsigned char>(input[0]))
+		|| !std::isprint(input[0]))
 		return (false);
 	return (true);
 }
@@ -52,7 +63,7 @@ bool	ConversionInput::inputIsInt(const std::string& input)
 		return (false);
 	i = 0;
 	if (input[i] == '-' || input[i] == '+') i++;
-	for (int j = i; j < input.length(); j++)
+	for (std::string::size_type j = i; j < input.length(); j++)
 		if (!std::isdigit(static_cast<unsigned char>(input[j])))
 			return (false);
 	return (true);
@@ -85,7 +96,6 @@ bool	ConversionInput::inputIsFloat(const std::string& input)
 			return (false);
 	return (input[input_length - 1] == 'f');
 }
-// Make sure to check type in order
 
 bool	ConversionInput::inputIsSpecialF(const std::string& input)
 {
@@ -101,12 +111,9 @@ bool	ConversionInput::inputIsSpecialD(const std::string& input)
 	return (false);
 }
 
-
 std::ostream&	operator<<(std::ostream& o, const enum e_inputType& inputType)
 {
 	std::string	inputTypes[] = {"INVALID", "CHAR", "INT", "FLOAT", "DOUBLE", "SPC_F", "SPC_D"};
 	o << inputTypes[inputType];
 	return (o);
 }
-
-

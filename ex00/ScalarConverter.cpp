@@ -2,8 +2,8 @@
 
 ScalarConverter::ScalarConverter() {};
 ScalarConverter::~ScalarConverter() {};
-ScalarConverter::ScalarConverter(const ScalarConverter& sC) {};
-ScalarConverter&	ScalarConverter::operator=(const ScalarConverter& sC) { return (*this); };
+ScalarConverter::ScalarConverter(const ScalarConverter& sC) {(void)sC;};
+ScalarConverter&	ScalarConverter::operator=(const ScalarConverter& sC) {(void)sC; return (*this); };
 
 void	ScalarConverter::printChar(const char& c)
 {
@@ -11,14 +11,12 @@ void	ScalarConverter::printChar(const char& c)
 		std::cout << "char: '" << c << "'" << std::endl;
 	else
 		std::cout << "char: " << "Not Displayable" << std::endl;
-
 }
 
 void	ScalarConverter::convertChar(const ConversionInput& input)
 {
 	const std::string&	str(input.getInput());
 
-	if (std::isprint(static_cast<unsigned char>(str[0])))
 	std::cout << "char: " << str[0] << std::endl;
 	std::cout << "int: " << static_cast<int>(str[0]) << std::endl;
 	std::cout << "float: " << static_cast<float>(str[0]) << ".0f" << std::endl;
@@ -71,7 +69,7 @@ void	ScalarConverter::convertSpcF(const ConversionInput& input)
 	std::cout << "int: " << "Impossible" << std::endl;
 	std::cout << "float: " << str << std::endl;
 	std::cout << "double: ";
-	for (int i = 0; i < str.length() - 1; i++)
+	for (std::string::size_type i = 0; i < str.length() - 1; i++)
 		std::cout << str[i];
 	std::cout << std::endl;
 }

@@ -1,4 +1,4 @@
-NAME = serializer
+NAME = typeinfo
 
 CC = c++
 CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
