@@ -1,7 +1,7 @@
 NAME = typeinfo
 
 CC = c++
-CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
+CFLAGS = -Wall -Werror -Wextra -std=c++98
 
 SRCS = main.cpp
 
@@ -11,7 +11,7 @@ OBJS = $(SRCS:.cpp=.o)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) -fsanitize=address -o $(NAME)
+	$(CC) $(OBJS) -o $(NAME)
 
 all: $(NAME)
 
