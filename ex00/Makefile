@@ -1,17 +1,17 @@
 NAME = convert
 
-CC = c++
-CFLAGS = -Wall -Werror -Wextra -std=c++98
+CXX = c++
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98
 
 SRCS = main.cpp ConversionInput.cpp ScalarConverter.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
 %.o:%.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) -o $(NAME)
+	$(CXX) $(OBJS) -o $(NAME)
 
 all: $(NAME)
 

@@ -10,12 +10,13 @@ struct Data
 class Serializer
 {
 public:
-	Serializer();
 	~Serializer();
 	Serializer(const Serializer& o);
 	Serializer& operator=(const Serializer& o);
 	static uintptr_t serialize(Data* ptr);
 	static Data* deserialize(uintptr_t raw);
+private:
+	Serializer();
 };
 
 Serializer::Serializer() {};
